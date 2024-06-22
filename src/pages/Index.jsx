@@ -38,6 +38,22 @@ const Index = () => {
     setWpm(Math.round(wordCount / timeDiff));
   };
 
+  const getHighlightedText = (text, input) => {
+    const words = text.split(" ");
+    const inputWords = input.split(" ");
+    return words.map((word, index) => {
+      let color = "black";
+      if (index < inputWords.length) {
+        color = word === inputWords[index] ? "green" : "red";
+      }
+      return (
+        <span key={index} style={{ color }}>
+          {word}{" "}
+        </span>
+      );
+    });
+  };
+
   const handleRestart = () => {
     setPassage(passages[Math.floor(Math.random() * passages.length)]);
     setInput("");
@@ -50,7 +66,7 @@ const Index = () => {
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
       <VStack spacing={4} width="100%">
         <Heading as="h1" size="xl">WPM Typing Game</Heading>
-        <Text fontSize="lg">{passage}</Text>
+        <Text fontSize="lg">{getHighlightedText(passage, input)}</Text>
         <Textarea
           value={input}
           onChange={handleChange}
