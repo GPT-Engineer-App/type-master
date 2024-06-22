@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Container, Text, VStack, Textarea, Button, Box, Heading } from "@chakra-ui/react";
-
-
+import { Container, Text, VStack, Textarea, Button, Box, Heading, Link } from "@chakra-ui/react";
 
 const Index = () => {
   const [passage, setPassage] = useState("");
@@ -88,8 +86,17 @@ const Index = () => {
           </Box>
         )}
       </VStack>
+      <Footer />
     </Container>
   );
 };
+
+const Footer = () => (
+  <Box as="footer" py={4} textAlign="center" width="100%" mt={8} borderTop="1px" borderColor="gray.200">
+    <Text fontSize="sm">
+      © {new Date().getFullYear()} WPM Typing Game. All rights reserved. | <Link href="https://example.com" isExternal>Privacy Policy</Link> | <Link href="https://example.com" isExternal>Terms of Service</Link>
+    </Text>
+  </Box>
+);
 
 export default Index;
