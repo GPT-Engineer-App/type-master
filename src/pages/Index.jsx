@@ -25,6 +25,10 @@ const Index = () => {
       setStartTime(new Date());
     }
     setInput(e.target.value);
+
+    if (e.target.value === passage) {
+      handleSubmit();
+    }
   };
 
   const handleSubmit = () => {
