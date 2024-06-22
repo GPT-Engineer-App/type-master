@@ -66,8 +66,8 @@ const Index = () => {
   };
 
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4} width="100%">
+    <Container centerContent maxW="container.md" minH="100vh" display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
+      <VStack spacing={4} width="100%" flex="1">
         <Heading as="h1" size="xl">WPM Typing Game</Heading>
         <Text fontSize="lg">{getHighlightedText(passage, input)}</Text>
         <Textarea
