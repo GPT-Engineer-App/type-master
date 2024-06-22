@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { Container, Text, VStack, Textarea, Button, Box, Heading } from "@chakra-ui/react";
 
-const passages = [
-  "The quick brown fox jumps over the lazy dog.",
-  "A journey of a thousand miles begins with a single step.",
-  "To be or not to be, that is the question.",
-  "All that glitters is not gold.",
-  "The only thing we have to fear is fear itself."
-];
+
 
 const Index = () => {
   const [passage, setPassage] = useState("");
@@ -17,8 +12,18 @@ const Index = () => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    setPassage(passages[Math.floor(Math.random() * passages.length)]);
+    fetchPassage();
   }, []);
+
+  const fetchPassage = async () => {
+    try {
+      const response = await axios.get("https://api.quotable.io/random");
+      setPassage(response.data.content);
+    } catch (error) {
+      console.error("Error fetching passage:", error);
+      setPassage("The quick brown fox jumps over the lazy dog."); // Fallback passage
+    }
+  };
 
   const handleChange = (e) => {
     if (!startTime) {
@@ -55,7 +60,7 @@ const Index = () => {
   };
 
   const handleRestart = () => {
-    setPassage(passages[Math.floor(Math.random() * passages.length)]);
+    fetchPassage();
     setInput("");
     setStartTime(null);
     setWpm(null);
